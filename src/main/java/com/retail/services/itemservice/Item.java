@@ -1,5 +1,7 @@
 package com.retail.services.itemservice;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,12 +20,12 @@ public class Item {
 	private String description;
 
 	@Column(name = "price")
-	private Double price;
+	private BigDecimal price;
 
 	public Item() {
 	}
 
-	public Item(Long id, String name, String description, Double price) {
+	public Item(Long id, String name, String description, BigDecimal price) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -55,11 +57,11 @@ public class Item {
 		this.description = description;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
