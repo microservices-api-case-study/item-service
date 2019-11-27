@@ -23,11 +23,21 @@ public class ItemServiceController {
 	@Autowired
 	ItemRepository itemRepository;
 
+	/**
+	 * This operation returns the details of all the Items
+	 * @return List<Item>
+	 */
 	@GetMapping("/items")
 	public List<Item> getAllItems(){
 		log.info(displayEnvInfo());
 		return itemRepository.findAll();
 	}
+	
+	/**
+	 * This operation returns the details of a specific item 
+	 * matching the itemname provided as an input
+	 * @return Item
+	 */
 	
 	@GetMapping("/items/{itemname}")
 	public Item getItemByName(@PathVariable("itemname") String itemName){
@@ -36,6 +46,6 @@ public class ItemServiceController {
 	}
 	
 	private String displayEnvInfo() {
-		return "Request received by Item Service running at Port# "+environment.getProperty("local.server.port");
+		return "Request received by item-service instance running at Port# "+environment.getProperty("local.server.port");
 	}
 }
