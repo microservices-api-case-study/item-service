@@ -1,4 +1,4 @@
-package com.retail.services.itemservice;
+package com.retail.services.itemservice.model;
 
 import java.math.BigDecimal;
 

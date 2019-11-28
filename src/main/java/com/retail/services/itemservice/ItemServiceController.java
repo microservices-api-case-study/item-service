@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.retail.services.itemservice.model.Item;
+import com.retail.services.itemservice.repos.ItemRepository;
+
 @RestController
 @RequestMapping("/service2")
 public class ItemServiceController {
