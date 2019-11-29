@@ -88,6 +88,12 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.3</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*Application.*</exclude>
+						<exclude>**/*model/*</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<id>coverage-initialize</id>
@@ -113,8 +119,8 @@
 								<rule>
 									<element>CLASS</element>
 									<excludes>
-										<exclude>com.retail.microservices.ItemServiceApplication</exclude>
-										<exclude>com.retail.microservices.Item</exclude>
+										<exclude>**/*Application.*</exclude>
+										<exclude>**/*model/*</exclude>
 									</excludes>
 									<limits>
 										<limit>
@@ -148,7 +154,6 @@
 				<reportSets>
 					<reportSet>
 						<reports>
-							<!-- select non-aggregate reports -->
 							<report>report</report>
 						</reports>
 					</reportSet>
