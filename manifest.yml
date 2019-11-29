@@ -1,6 +1,9 @@
 ---
 applications:
-- name: item-service
+- name: anand-item-service
   path: ./target/item-service-1.0.jar
   buildpacks:
       - https://github.com/cloudfoundry/java-buildpack.git
+  services:
+  - anand-config-server
+  - anand-service-registry

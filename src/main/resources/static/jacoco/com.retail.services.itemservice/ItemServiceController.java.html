@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemServiceController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">item-service</a> &gt; <a href="index.source.html" class="el_package">com.retail.services.itemservice</a> &gt; <span class="el_source">ItemServiceController.java</span></div><h1>ItemServiceController.java</h1><pre class="source lang-java linenums">package com.retail.services.itemservice;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.retail.services.itemservice.model.Item;
+import com.retail.services.itemservice.repos.ItemRepository;
+
+@RestController
+@RequestMapping(&quot;/service2&quot;)
+<span class="fc" id="L19">public class ItemServiceController {</span>
+	
+<span class="fc" id="L21">	private static final Logger log = LoggerFactory.getLogger(ItemServiceController.class);</span>
+	
+	@Autowired
+	Environment environment;
+	
+	@Autowired
+	ItemRepository itemRepository;
+
+	/**
+	 * This operation returns the details of all the Items
+	 * @return List&lt;Item&gt;
+	 */
+	@GetMapping(&quot;/items&quot;)
+	public List&lt;Item&gt; getAllItems(){
+<span class="fc" id="L35">		log.info(displayEnvInfo());</span>
+<span class="fc" id="L36">		return itemRepository.findAll();</span>
+	}
+	
+	/**
+	 * This operation returns the details of a specific item 
+	 * matching the itemname provided as an input
+	 * @return Item
+	 */
+	
+	@GetMapping(&quot;/items/{itemname}&quot;)
+	public Item getItemByName(@PathVariable(&quot;itemname&quot;) String itemName){
+<span class="fc" id="L47">		log.info(displayEnvInfo());</span>
+<span class="fc" id="L48">		return itemRepository.findByName(itemName);</span>
+	}
+	
+	private String displayEnvInfo() {
+<span class="fc" id="L52">		return &quot;Request received by item-service instance running at Port# &quot;+environment.getProperty(&quot;local.server.port&quot;);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
