@@ -2,9 +2,13 @@
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +20,13 @@ import com.retail.services.itemservice.repos.ItemRepository;
 
 @RestController
 @RequestMapping(&quot;/service2&quot;)
-<span class="fc" id="L19">public class ItemServiceController {</span>
+@RefreshScope
+<span class="fc" id="L24">public class ItemServiceController {</span>
 	
-<span class="fc" id="L21">	private static final Logger log = LoggerFactory.getLogger(ItemServiceController.class);</span>
+<span class="fc" id="L26">	private static final Logger log = LoggerFactory.getLogger(ItemServiceController.class);</span>
+	
+	@Value(&quot;${app.custom.message}&quot;)
+	String message;
 	
 	@Autowired
 	Environment environment;
@@ -32,8 +40,9 @@ import com.retail.services.itemservice.repos.ItemRepository;
 	 */
 	@GetMapping(&quot;/items&quot;)
 	public List&lt;Item&gt; getAllItems(){
-<span class="fc" id="L35">		log.info(displayEnvInfo());</span>
-<span class="fc" id="L36">		return itemRepository.findAll();</span>
+<span class="fc" id="L43">		log.info(message);</span>
+<span class="fc" id="L44">		log.info(displayEnvInfo());</span>
+<span class="fc" id="L45">		return itemRepository.findAll();</span>
 	}
 	
 	/**
@@ -43,16 +52,16 @@ import com.retail.services.itemservice.repos.ItemRepository;
 	 */
 	
 	@GetMapping(&quot;/items/{itemname}&quot;)
-	public Item getItemByName(@PathVariable(&quot;itemname&quot;) String itemName){
-<span class="fc" id="L47">		log.info(displayEnvInfo());</span>
-<span class="fc" id="L48">		return itemRepository.findByName(itemName);</span>
+	public Item getItemByName(@Valid @PathVariable(&quot;itemname&quot;) String itemName){
+<span class="fc" id="L56">		log.info(displayEnvInfo());</span>
+<span class="fc" id="L57">		return itemRepository.findByName(itemName);</span>
 	}
 	
 	private String displayEnvInfo() {
-<span class="fc" id="L52">		return &quot;Request received by item-service instance running at &quot;</span>
-<span class="fc" id="L53">				+ &quot;|| IP: &quot; +environment.getProperty(&quot;spring.cloud.client.ip-address&quot;)</span>
-<span class="fc" id="L54">				+ &quot;|| Host: &quot; +environment.getProperty(&quot;spring.cloud.client.hostname&quot;)</span>
-<span class="fc" id="L55">				+ &quot;|| Port: &quot;+environment.getProperty(&quot;local.server.port&quot;);</span>
+<span class="fc" id="L61">		return &quot;Request received by item-service instance running at&quot;</span>
+<span class="fc" id="L62">				+ &quot; || IP: &quot; +environment.getProperty(&quot;spring.cloud.client.ip-address&quot;)</span>
+<span class="fc" id="L63">				+ &quot; || Host: &quot; +environment.getProperty(&quot;spring.cloud.client.hostname&quot;)</span>
+<span class="fc" id="L64">				+ &quot; || Port: &quot;+environment.getProperty(&quot;local.server.port&quot;);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
