@@ -2,6 +2,8 @@ package com.retail.services.itemservice;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +52,7 @@ public class ItemServiceController {
 	 */
 	
 	@GetMapping("/items/{itemname}")
-	public Item getItemByName(@PathVariable("itemname") String itemName){
+	public Item getItemByName(@Valid @PathVariable("itemname") String itemName){
 		log.info(displayEnvInfo());
 		return itemRepository.findByName(itemName);
 	}
