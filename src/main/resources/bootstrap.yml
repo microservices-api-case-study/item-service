@@ -4,6 +4,11 @@ spring:
 server:
   port: 8200
   
+app:
+  security:
+    basic:
+      enabled: false
+  
 ---
 
 spring:
@@ -16,3 +21,4 @@ spring:
 eureka:
   client:
     enabled: false
+
