@@ -21,4 +21,6 @@ spring:
 eureka:
   client:
     enabled: false
-
+app:
+  custom:
+    message: ""
