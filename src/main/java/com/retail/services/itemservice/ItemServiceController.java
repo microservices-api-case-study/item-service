@@ -49,6 +49,9 @@ public class ItemServiceController {
 	}
 	
 	private String displayEnvInfo() {
-		return "Request received by item-service instance running at Port# "+environment.getProperty("local.server.port");
+		return "Request received by item-service instance running at"
+				+ " || IP: " +environment.getProperty("spring.cloud.client.ip-address")
+				+ " || Host: " +environment.getProperty("spring.cloud.client.hostname")
+				+ " || Port: "+environment.getProperty("local.server.port");
 	}
 }

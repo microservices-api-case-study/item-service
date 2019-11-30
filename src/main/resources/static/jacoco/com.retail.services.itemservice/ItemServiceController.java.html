@@ -49,7 +49,10 @@ import com.retail.services.itemservice.repos.ItemRepository;
 	}
 	
 	private String displayEnvInfo() {
-<span class="fc" id="L52">		return &quot;Request received by item-service instance running at Port# &quot;+environment.getProperty(&quot;local.server.port&quot;);</span>
+<span class="fc" id="L52">		return &quot;Request received by item-service instance running at &quot;</span>
+<span class="fc" id="L53">				+ &quot;|| IP: &quot; +environment.getProperty(&quot;spring.cloud.client.ip-address&quot;)</span>
+<span class="fc" id="L54">				+ &quot;|| Host: &quot; +environment.getProperty(&quot;spring.cloud.client.hostname&quot;)</span>
+<span class="fc" id="L55">				+ &quot;|| Port: &quot;+environment.getProperty(&quot;local.server.port&quot;);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
