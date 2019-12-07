@@ -3,6 +3,8 @@ package com.retail.services.itemservice;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +54,7 @@ public class ItemServiceController {
 	 */
 	
 	@GetMapping("/items/{itemname}")
-	public Item getItemByName(@Valid @PathVariable("itemname") String itemName){
+	public Item getItemByName(@Valid @NotNull @NotBlank @PathVariable("itemname") String itemName){
 		log.info(displayEnvInfo());
 		return itemRepository.findByName(itemName);
 	}
