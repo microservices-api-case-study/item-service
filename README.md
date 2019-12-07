@@ -4,6 +4,15 @@
 
 ![](https://github.com/microservices-api-case-study/sales-order-service/blob/master/.gitbook/assets/item-service.svg)
 
+## Operations
+
+1. Returns existing item details if the item name is sent as an input
+2. Returns all the existing items with their details
+
+### Table
+
+1. Item – id, name, description, price 
+
 **Source:** [https://github.com/microservices-api-case-study/item-service](https://github.com/microservices-api-case-study/item-service)
 
 **Swagger PCF App URL:** [http://anand-item-service.cfapps.io/swagger-ui.html](http://anand-item-service.cfapps.io/swagger-ui.html)
