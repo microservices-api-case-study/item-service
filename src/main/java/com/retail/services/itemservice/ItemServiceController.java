@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.retail.services.itemservice.model.Item;
 import com.retail.services.itemservice.repos.ItemRepository;
 
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/service2")
 @RefreshScope
@@ -49,12 +53,15 @@ public class ItemServiceController {
 	
 	/**
 	 * This operation returns the details of a specific item 
-	 * matching the itemname provided as an input
+	 * matching the itemname provided as an input. 
+	 * If the requested item is not present then it returns an empty response.
 	 * @return Item
 	 */
 	
 	@GetMapping("/items/{itemname}")
-	public Item getItemByName(@Valid @NotNull @NotBlank @PathVariable("itemname") String itemName){
+	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid request format") })
+	public Item getItemByName(@ApiParam(value="Item Name\n Examples: Pen, Book", required=true) 
+			@Valid @NotNull @NotBlank @PathVariable("itemname") String itemName){
 		log.info(displayEnvInfo());
 		return itemRepository.findByName(itemName);
 	}
