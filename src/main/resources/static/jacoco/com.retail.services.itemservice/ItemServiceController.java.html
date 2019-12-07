@@ -3,6 +3,8 @@
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.retail.services.itemservice.model.Item;
 import com.retail.services.itemservice.repos.ItemRepository;
 
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(&quot;/service2&quot;)
 @RefreshScope
-<span class="fc" id="L24">public class ItemServiceController {</span>
+<span class="fc" id="L30">public class ItemServiceController {</span>
 	
-<span class="fc" id="L26">	private static final Logger log = LoggerFactory.getLogger(ItemServiceController.class);</span>
+<span class="fc" id="L32">	private static final Logger log = LoggerFactory.getLogger(ItemServiceController.class);</span>
 	
 	@Value(&quot;${app.custom.message}&quot;)
 	String message;
@@ -40,28 +46,31 @@ import com.retail.services.itemservice.repos.ItemRepository;
 	 */
 	@GetMapping(&quot;/items&quot;)
 	public List&lt;Item&gt; getAllItems(){
-<span class="fc" id="L43">		log.info(message);</span>
-<span class="fc" id="L44">		log.info(displayEnvInfo());</span>
-<span class="fc" id="L45">		return itemRepository.findAll();</span>
+<span class="fc" id="L49">		log.info(message);</span>
+<span class="fc" id="L50">		log.info(displayEnvInfo());</span>
+<span class="fc" id="L51">		return itemRepository.findAll();</span>
 	}
 	
 	/**
 	 * This operation returns the details of a specific item 
-	 * matching the itemname provided as an input
+	 * matching the itemname provided as an input. 
+	 * If the requested item is not present then it returns an empty response.
 	 * @return Item
 	 */
 	
 	@GetMapping(&quot;/items/{itemname}&quot;)
-	public Item getItemByName(@Valid @PathVariable(&quot;itemname&quot;) String itemName){
-<span class="fc" id="L56">		log.info(displayEnvInfo());</span>
-<span class="fc" id="L57">		return itemRepository.findByName(itemName);</span>
+	@ApiResponses(value = { @ApiResponse(code = 400, message = &quot;Invalid request format&quot;) })
+	public Item getItemByName(@ApiParam(value=&quot;Item Name\n Examples: Pen, Book&quot;, required=true) 
+			@Valid @NotNull @NotBlank @PathVariable(&quot;itemname&quot;) String itemName){
+<span class="fc" id="L65">		log.info(displayEnvInfo());</span>
+<span class="fc" id="L66">		return itemRepository.findByName(itemName);</span>
 	}
 	
 	private String displayEnvInfo() {
-<span class="fc" id="L61">		return &quot;Request received by item-service instance running at&quot;</span>
-<span class="fc" id="L62">				+ &quot; || IP: &quot; +environment.getProperty(&quot;spring.cloud.client.ip-address&quot;)</span>
-<span class="fc" id="L63">				+ &quot; || Host: &quot; +environment.getProperty(&quot;spring.cloud.client.hostname&quot;)</span>
-<span class="fc" id="L64">				+ &quot; || Port: &quot;+environment.getProperty(&quot;local.server.port&quot;);</span>
+<span class="fc" id="L70">		return &quot;Request received by item-service instance running at&quot;</span>
+<span class="fc" id="L71">				+ &quot; || IP: &quot; +environment.getProperty(&quot;spring.cloud.client.ip-address&quot;)</span>
+<span class="fc" id="L72">				+ &quot; || Host: &quot; +environment.getProperty(&quot;spring.cloud.client.hostname&quot;)</span>
+<span class="fc" id="L73">				+ &quot; || Port: &quot;+environment.getProperty(&quot;local.server.port&quot;);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
