@@ -1,5 +1,7 @@
 # Item Service \(Core\)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/olvuyne97sk9f8cj?svg=true)](https://ci.appveyor.com/project/arockiaanandraj/item-service)
+
 ## Architecture
 
 ![](https://github.com/microservices-api-case-study/sales-order-service/blob/master/.gitbook/assets/item-service.svg)
